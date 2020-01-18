@@ -8,6 +8,8 @@ class Guess(val colors: List[color] = Nil, max: Int = 4) {
 
   def Guess(max: Int): Guess = new Guess(Nil, max)
 
+  def Guess(colors: List[color]): Guess = new Guess(colors, colors.length)
+
   def Guess(): Guess = new Guess(Nil, 4)
 
   def +(color: color): Guess = this.colors.size match {
