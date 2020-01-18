@@ -16,4 +16,17 @@ object color extends Enumeration {
     if (num >= all.length) return all
     else return generateList(num, Nil)
   }
+
+  def validate(str: String): Boolean = {
+    this.all.map(x => x.toString().toLowerCase()).contains(str.toLowerCase())
+  }
+
+  def fromString(str: String): color = str.toLowerCase() match {
+    case "red" => RED
+    case "blue" => BLUE
+    case "orange" => ORANGE
+    case "green" => GREEN
+    case "yellow" => YELLOW
+    case "brown" => BROWN
+  }
 }
