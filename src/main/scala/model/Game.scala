@@ -1,5 +1,8 @@
 package model
 
+import inputs.GuessInput
+import views.BoardView
+
 class Game(val board: Board = new Board(), turns: Int = 10) {
   val win = this.board.solved()
 
@@ -8,9 +11,12 @@ class Game(val board: Board = new Board(), turns: Int = 10) {
     case _ => new Game(this.board + guess, this.turns - 1)
   }
 
-  def run(game: Game):String = (this.win, this.turns) match {
-    case (true,_) => "You win!"
-    case (false, 0) => "You lose!!!"
-    case (false, _) => run(this.nextTurn(new Guess()))
+  def run(game: Game = this):String = {
+    new BoardView().view(this.board)
+    (this.win, this.turns) match {
+      case (true,_) => "You win!"
+      case (false, 0) => "You lose!!!"
+      case (false, _) => run(this.nextTurn(new GuessInput().get(4)))
+    }
   }
 }
