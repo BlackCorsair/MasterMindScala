@@ -13,4 +13,6 @@ class ConfusionMatrix (val guess: Guess, val attempt: Guess) {
     case m if m.contains("Fail") => false
     case _ => true
   }
+
+  override def toString(): String = this.matrix.toString()
 }
