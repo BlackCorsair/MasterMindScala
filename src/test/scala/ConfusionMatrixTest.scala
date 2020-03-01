@@ -5,38 +5,39 @@ import model.color
 
 class ConfusionMatrixTest extends FunSuite {
   test("AllCorrect") {
-    assert(
-      new ConfusionMatrix(
-        new Guess(List(color.BLUE, color.BROWN)),
-        new Guess(List(color.BLUE, color.BROWN))
-      ).getMatrix() == List("Correct", "Correct")
+    val matrix = new ConfusionMatrix(
+      new Guess(List(color.BLUE, color.BROWN)),
+      new Guess(List(color.BLUE, color.BROWN))
     )
+    assert(matrix.matrix == List("Correct", "Correct"))
+    assert(matrix.solved == true)
   }
 
   test("CorrectColorsIncorrectPosition") {
-    assert(
-      new ConfusionMatrix(
+    val matrix = new ConfusionMatrix(
         new Guess(List(color.BROWN, color.BLUE)),
         new Guess(List(color.BLUE, color.BROWN))
-      ).getMatrix() == List("Miss placed", "Miss placed")
-    )
+      )
+    assert(matrix.matrix == List("Miss placed", "Miss placed"))
+    assert(matrix.solved == false)
   }
 
   test("TotallyWrong") {
-    assert(
-      new ConfusionMatrix(
+    val matrix = new ConfusionMatrix(
         new Guess(List(color.BROWN, color.BLUE)),
         new Guess(List(color.ORANGE, color.ORANGE))
-      ).getMatrix() == List("Fail", "Fail")
-    )
+      )
+    assert(matrix.matrix == List("Fail", "Fail"))
+    assert(matrix.solved == false)
   }
 
   test("OneCorrectOneWrongOneFail") {
-    assert(
-      new ConfusionMatrix(
+    val matrix = new ConfusionMatrix(
         new Guess(List(color.BROWN, color.BLUE, color.ORANGE)),
         new Guess(List(color.ORANGE, color.BLUE, color.RED))
-      ).getMatrix() == List("Correct", "Fail", "Miss placed")
-    )
+      )
+
+    assert(matrix.matrix == List("Correct", "Fail", "Miss placed"))
+    assert(matrix.solved == false)
   }
 }

@@ -1,19 +1,27 @@
 package model
 
 class Board(solution: Guess = new Guess(color.randomList(4)), val guesses: List[Guess] = Nil) {
+
+  val confusionMatrixList = this.guesses match {
+    case Nil => Nil
+    case _ => guesses.map( guess => guess == solution)
+  }
+
   def Board(solution: Guess) = new Board(solution, Nil)
 
   def Board() = new Board(new Guess(max=4))
 
-  def +(guess: Guess): Board = new Board(this.solution, guess::this.guesses)
+  def +(guess: Guess): Board = new Board(this.solution, guess :: this.guesses)
 
   def solved(): Boolean = {
-    def checkGuess(guesses: List[Guess]): Boolean = guesses match {
-      case Nil => false
-      case head::Nil => head == this.solution
-      case head::tail => head == this.solution && checkGuess(tail)
+    if (this.guesses == Nil) {
+      return false
     }
-    checkGuess(this.guesses)
+
+    this.confusionMatrixList.map(matrix => matrix.solved) match {
+      case booleans if booleans.contains(false) => false
+      case _ => true
+    }
   }
 
   def toString(solution: Boolean = false): String = {
