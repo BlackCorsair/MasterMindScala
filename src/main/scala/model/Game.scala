@@ -12,11 +12,13 @@ class Game(val board: Board = new Board(), turns: Int = 10) {
   }
 
   def run(game: Game = this):String = {
+    println("\n\n\n###\t TURN " + this.turns + "\t###")
     new BoardView().view(this.board)
+
     (this.win, this.turns) match {
       case (true,_) => "You win!"
       case (false, 0) => "You lose!!!"
-      case (false, _) => run(this.nextTurn(new GuessInput().get(4)))
+      case (false, _) => this.nextTurn(new GuessInput().get(4)).run()
     }
   }
 }
