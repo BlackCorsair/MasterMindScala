@@ -17,18 +17,7 @@ class Guess(val colors: List[color] = Nil, max: Int = 4) {
     case _ => new Guess(color::this.colors)
   }
 
-  def ==(other: Guess): Boolean = {
-    def compareLists(l1: List[color], l2: List[color]): Boolean = {
-      if (l1 == Nil && l2 == Nil) return true
-      if (l1.length != l2.length) return false
-      if (l1.head != l2.head) return false
-      compareLists(l1.tail, l2.tail)
-    }
-    other match {
-      case other: Guess => compareLists(this.colors, other.colors)
-      case _ => false
-    }
-  }
+  def ==(other: Guess): ConfusionMatrix =  new ConfusionMatrix(this, other)
 
   def colorToString(c: color): String = c match {
     case color.RED => "RED"
