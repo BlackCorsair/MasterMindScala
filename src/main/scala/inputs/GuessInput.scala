@@ -12,7 +12,7 @@ class GuessInput {
         println("Enter a color: ")
         val c = readLine()
         color.validate(c) match {
-          case true => getColors(color.fromString(c)::colors, ncolors)
+          case true => getColors(colors:+color.fromString(c), ncolors)
           case false => {
             println("Please choose one of the following colors:")
             println(color.all)
