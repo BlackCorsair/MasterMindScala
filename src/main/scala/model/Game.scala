@@ -3,7 +3,7 @@ package model
 import inputs.GuessInput
 import views.BoardView
 
-class Game(val board: Board = new Board(), turns: Int = 10) {
+class Game(val board: Board = new Board(), turns: Int = 2) {
   val win = this.board.solved()
 
   def nextTurn(guess: Guess): Game = this.turns match {

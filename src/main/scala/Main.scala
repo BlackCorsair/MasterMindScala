@@ -4,6 +4,6 @@ import views.{BoardView, GuessView}
 
 object Main {
   def main(args: Array[String]): Unit = {
-    new Game().run()
+    println(new Game().run())
   }
 }
