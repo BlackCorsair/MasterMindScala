@@ -1,5 +1,7 @@
 package model
 
+import model.color.color
+
 class ConfusionMatrix (val guess: Guess, val attempt: Guess) {
 
   val matrix = if ((guess.colors == Nil) ||  (attempt.colors == Nil)) Nil else attempt.colors.map(color => guess.colors match {
@@ -14,5 +16,11 @@ class ConfusionMatrix (val guess: Guess, val attempt: Guess) {
     case _ => true
   }
 
-  override def toString(): String = this.matrix.toString()
+    def matrixToString(hits: List[String]): String = hits match{
+      case Nil => ""
+      case head::Nil => head
+      case head::tail => head + " | " + matrixToString(tail)
+    }
+
+  override def toString(): String = "[ " + matrixToString(this.matrix) + " ]"
 }
