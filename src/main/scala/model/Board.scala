@@ -27,18 +27,17 @@ class Board(solution: Guess = new Guess(color.randomList(4)), val guesses: List[
   def toString(solution: Boolean = false): String = {
     def guessesToString(guesses: List[Guess]): String = guesses match {
       case Nil => ""
-      case head::Nil => return head.toString()
+      case head::Nil => return head.toString() + "\n"
       case head::tail => head.toString() + "\n" + guessesToString(tail)
     }
 
     def confusionMatrixListToString(confusionMatrixList: List[ConfusionMatrix]): String = confusionMatrixList match {
       case Nil => ""
-      case head::Nil => return head.toString()
+      case head::Nil => return head.toString() + "\n"
       case head::tail => head.toString() + "\n" + confusionMatrixListToString(tail)
     }
-    "Guesses \t\t\t\t|\t\t\t\t Hits\n" + guessesToString(this.guesses) + "\t|\t" +
-      confusionMatrixListToString(this.confusionMatrixList) +
-      (if (solution) "Solution:\n" + this.solution.toString() else "")
+    "Guesses: \n" + guessesToString(this.guesses) + (if (solution) "Solution:\n" + this.solution.toString() else "") +
+    "Hits: \n" + confusionMatrixListToString(this.confusionMatrixList)
   }
 
   override def toString: String = this.toString(false)
