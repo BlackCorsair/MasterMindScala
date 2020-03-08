@@ -1,9 +1,9 @@
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
 import model.{Board, Guess}
 import model.color
 
-class BoardTest extends FunSuite{
+class BoardTest extends AnyFunSuite {
   test("AddGuess") {
     val solution = new Guess(List(color.RED))
     val guesses = List(solution)

@@ -1,9 +1,8 @@
-import org.scalatest.FunSuite
-
 import model.{ConfusionMatrix, Guess}
 import model.color
+import org.scalatest.funsuite.AnyFunSuite
 
-class ConfusionMatrixTest extends FunSuite {
+class ConfusionMatrixTest extends AnyFunSuite {
   test("AllCorrect") {
     val matrix = new ConfusionMatrix(
       new Guess(List(color.BLUE, color.BROWN)),
