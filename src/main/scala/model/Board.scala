@@ -4,7 +4,7 @@ class Board(solution: Guess = new Guess(color.randomList(4)), val guesses: List[
 
   val confusionMatrixList = this.guesses match {
     case Nil => Nil
-    case _ => guesses.map( guess => guess == solution)
+    case _ => guesses.map( guess => guess compareTo solution)
   }
 
   def Board(solution: Guess) = new Board(solution, Nil)
